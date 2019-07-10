@@ -1,0 +1,94 @@
+html, body {
+	margin :  0px;
+	height: 100%;
+	width: 100%;
+	
+	background-color: #d5e2e8;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	align-content: stretch;
+	
+	height: 100%;
+	width: 100%;
+}
+
+#header{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: stretch;
+	
+	height: 10%;
+	width: 100%;
+}
+
+#corps {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: stretch;
+	align-content: stretch;
+	
+	height: 85%;
+	width: 100%;
+}
+
+#spatialPart{
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: stretch;
+	align-content: stretch;
+	
+	height: 100%;
+	width: 50%;
+}
+
+#spatialPart >div {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	
+	height: 5%;
+	width: 100%;
+}
+
+#spatialPart >div span{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+#graphicalPart {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: stretch;
+	
+	height: 100%;
+	width: 50%;
+	
+}
+
+#footer {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	align-content: stretch;
+	
+	height: 5%;
+	width: 100%;
+}
