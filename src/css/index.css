@@ -56,18 +56,17 @@ body {
 
 #spatialPart >div {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: center;
 	
 	height: 5%;
 	width: 100%;
 }
 
-#spatialPart >div span {
-	border: solid #206d91;
-	border-width: 1px;
-	border-radius: 5px;
-	
+#spatialPart >div span{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
 }
 
 #graphicalPart {
