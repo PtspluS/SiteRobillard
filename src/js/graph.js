@@ -99,7 +99,7 @@ var graph3d = function(k,l){
 		for(let n = 0; n<=i ; n++){
 			for(let m = 0; m<=Math.sqrt(i*i-n*n);m++){
 				for(let p = 0; p<=Math.sqrt(i*i-n*n-m*m);p++){
-					y[i]+=4;
+					y[i]+=8;
 				}
 			}
 		}
