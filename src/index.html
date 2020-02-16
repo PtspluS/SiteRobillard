@@ -11,48 +11,55 @@
 	<script src="./libs/three.min.js" type="text/javascript"></script>
 	<!--Personnal Code-->
 	<script src="./js/language.js" type="text/javascript"></script>
+	<script src="./js/graph.js" type="text/javascript"></script>
 </head>
 <body>
 	<div id = "header">
-	<button type="button" id="1d">1D</button>
-	<button type="button" id="2d">2D</button>
-	<button type="button" id="3d">3D</button>
-	<select id="selectLanguage" name="select" multiple>
+		<div id="menu">
+			<button type="button" id="1d" class="bouton">1D</button>
+			<button type="button" id="2d" class="bouton">2D</button>
+			<button type="button" id="3d" class="bouton">3D</button>
+			<select id="selectLanguage" name="select">
 		<!--Juste le français est implémenté pour le moment-->
-		<option value="fr" data-content='<span></span> Français' selected>Français</option>
-		<option value="en" data-content='<span></span> English' selected>English</option>
-	</select>
+				<option value="fr" data-content='<span></span> Français' selected>Français</option>
+				<option value="en" data-content='<span></span> English' selected>English</option>
+			</select>
+		</div>
 	</div>
 
 	<div id='corps'>
 		<div id ="spatialPart">
-			<canvas>
-				Votre navigateur ne peut pas lire ce canvas.
-			</canvas>
+			<div id="container"></div>
 			<div>
 				<span>
 					<label for='kRange'>||K||</label>
-					<input type="range" name="kRange" min='0' max='100'>
+					<input type="range" name="kRange" min='0' max='20' step="0.01">
 					<span id="kRangeValue"></span>
 				</span>
 				<span>
 					<label for='LRange'>L</label>
-					<input type="range" name="LRange" min='1' max='10' step="0.5">
+					<input type="range" name="LRange" min='1' max='15' step="0.01">
 					<span id="LRangeValue"></span>
+				</span>
+				<span>
+					<label for='ORange'>Opacity</label>
+					<input type="range" name="ORange" min='0' max='1' step="0.01">
+					<span id="ORangeValue"></span>
 				</span>
 			</div>
 		</div>
 		<div id ="graphicalPart">
 			<span id="titleGraph">Graph</span>
 			<div id="graph">
-				
+
 			</div>
 		</div>
 	</div>
 
 	<div id='footer'>
-		&copy Pierre Marez - Matthieu Desmarescaux
+		&copy; Pierre Marez - Matthieu Desmarescaux
 	</div>
 </body>
-<script src="./js/main.js" type="text/javascript"></script>
+<script src="./js/test.js" type="module"></script>
+<script src="./js/main.js" type="module"></script>
 </html>
