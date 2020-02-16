@@ -1,7 +1,7 @@
 let h = Math.pow(6,62607015,-34);
 let h_ = h/(2*Math.PI);//ou h_ =1
 
-var graph1d = function graph1d (k, l){
+var graph1d = function(k,l){
 
 	let x = [];
 	let y = [];
@@ -9,7 +9,7 @@ var graph1d = function graph1d (k, l){
 	let count = 2;
 
 	for(let i = 0; i<=(k*l)/(2*Math.PI); i++){
-		
+
 		x[i] = i*((2*Math.PI)/l);
 		y[i] = i*2;
 
@@ -43,7 +43,6 @@ var graph1d = function graph1d (k, l){
 	}
 	Plotly.newPlot('graph',data,layout,{scrollZoom : true},{showSendToCloud: true});
 }
-
 
 var graph2d = function(k,l){
 	let x = [];
@@ -99,7 +98,7 @@ var graph3d = function(k,l){
 		for(let n = 0; n<=i ; n++){
 			for(let m = 0; m<=Math.sqrt(i*i-n*n);m++){
 				for(let p = 0; p<=Math.sqrt(i*i-n*n-m*m);p++){
-					y[i]+=4;
+					y[i]+=8;
 				}
 			}
 		}
