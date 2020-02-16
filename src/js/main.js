@@ -1,5 +1,5 @@
 import { init, update, modif } from './test.js';
-
+//test
 (function () {
 //permet de savoir si on a appuyé sur le bouton 1d ou 2d ou 3d
 	let currentState = '1d';
