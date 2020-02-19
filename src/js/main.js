@@ -12,6 +12,9 @@ import { init, update, modif } from './test.js';
 		k = $("input[name=kRange]").val();
 	 	l = $("input[name=LRange]").val();
 		o = $("input[name=ORange]").val();
+		boutonl.text(l);
+		boutono.text(o);
+		boutonk.text(k);
 	};
 
 //permet de changer le language
@@ -24,7 +27,6 @@ import { init, update, modif } from './test.js';
 //permet d'intéragir si on appuiye sur "k"
 	$('input[name=kRange]').on('input',()=>{
 		up()
-		boutonk.text(k);
 		if(currentState == '1d')
 			graph1d(k,l);
 		else if (currentState == '2d')
@@ -37,7 +39,6 @@ import { init, update, modif } from './test.js';
 //permet d'intéragir si on appuiye sur "l"
 	$('input[name=LRange]').on('input',()=>{
 		up()
-		boutonl.text(l);
 		if(currentState == '1d')
 			graph1d(k,l);
 		else if (currentState == '2d')
@@ -50,7 +51,6 @@ import { init, update, modif } from './test.js';
 //permet d'intéragir si on appuiye sur "O"
 	$('input[name=ORange]').on('input',()=>{
 		up()
-		boutono.text(o);
 		update();
 	});
 
@@ -58,7 +58,7 @@ import { init, update, modif } from './test.js';
 	$('#1d').click(function(){
 		up()
 		currentState = '1d';
-		modif(20,0,0)
+		modif(1)
 		update();
 		graph1d(k,l);
 	});
@@ -67,7 +67,7 @@ import { init, update, modif } from './test.js';
 	$('#2d').click(function(){
 		up()
 		currentState = '2d';
-		modif(20,0,20)
+		modif(2)
 		update();
 		graph2d(k,l);
 	});
@@ -76,7 +76,7 @@ import { init, update, modif } from './test.js';
 	$('#3d').click(function(){
 		up()
 		currentState = '3d';
-		modif(20,20,20)
+		modif(3)
 		update();
 		graph3d(k,l);
 	});
@@ -87,9 +87,6 @@ import { init, update, modif } from './test.js';
 
 	up()
 	graph1d(k,l);
-	modif(20,0,0);
+	modif(1);
 	init();
-	boutonk.text(k)
-	boutonl.text(l)
-	boutono.text(o)
 })();

@@ -13,49 +13,55 @@ let container = document.getElementById('container');
 let postprocessing = {};
 let listOfSphere = [];
 let stats, camera, scene, renderer, helper, width, height;
-let xgrid = 10, ygrid = 0,zgrid = 0;
+let plan = 1;
 let geometry = new THREE.SphereBufferGeometry( 1, 20, 10 );
 
-let addSphere = function(color,opacity,scale,positionX,positionY,postionZ){
+let addSphere = function(plan,color,opacity,scale,positionX,positionY,positionZ,l){
   let mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { color: color} ) );
-	mesh.position.set(positionX, positionY, postionZ);
+	mesh.position.set(positionX*Math.PI/l, positionY*Math.PI/l, positionZ*Math.PI/l);
 	mesh.scale.set( scale, scale, scale);
 	mesh.material.opacity = opacity;
 	mesh.material.transparent = true;
   mesh.material.depthWrite = false;
 	mesh.matrixAutoUpdate = false;
+  mesh.plan = plan;
+  mesh.x = positionX;
+  mesh.y = positionY;
+  mesh.z = positionZ;
 	mesh.updateMatrix();
 	scene.add( mesh );
   listOfSphere.push(mesh);
 }
 
+let changeSphere = function(mesh,opacity,l,scale){
+  mesh.scale.set( scale, scale, scale);
+  mesh.position.set(mesh.x*2*Math.PI/l, mesh.y*2*Math.PI/l, mesh.z*2*Math.PI/l)
+  mesh.material.opacity = opacity;
+  mesh.updateMatrix();
+}
+
 let update = function() {
-  let red = 0xF00000
-  let white = 0xFFFFFF
-  let black = 0x000000
-
+  let kg = $("input[name=kRange]");
+  let l = $("input[name=LRange]");
+  let o = $("input[name=ORange]");
   listOfSphere.forEach((mesh) => {
-    scene.remove(mesh);
+    if(mesh.plan == -1)
+      changeSphere(mesh,0.5,l.val(),kg.val());
+    else
+      changeSphere(mesh,o.val(),l.val(),0.1);
+      if(mesh.plan > plan)
+        mesh.material.opacity = 0;
   });
-
-  let kg = $("input[name=kRange]").val();
-  let l = $("input[name=LRange]").val();
-  let o = $("input[name=ORange]").val();
-
-  for (let  i = -xgrid/2; i < xgrid/2+1; i++ )
-    for (let j = -ygrid/2; j < ygrid/2+1; j++ )
-      for (let k = -zgrid/2; k < zgrid/2+1; k++ )
-        if(i == 0 && j == 0 && k == 0)
-          addSphere(white,o, 0.1,i*Math.PI/l, j*Math.PI/l, k*Math.PI/l);
-        else
-          addSphere(black,o, 0.1,i*Math.PI/l, j*Math.PI/l, k*Math.PI/l);
-  addSphere(red,0.5,kg/2,0,0,0);
+  kg.prop({
+    'min': 0,
+    'max': 20*Math.PI/l.val()
+});
 }
 
 let animate = function(){
   requestAnimationFrame( animate, renderer.domElement );
   stats.update();
-    renderer.render( scene, camera );
+  renderer.render( scene, camera );
 }
 
 let init = function(){
@@ -94,6 +100,28 @@ let init = function(){
 	postprocessing.bokeh.uniforms[ "aperture" ].value = 5 * 0.00001;
 	postprocessing.bokeh.uniforms[ "maxblur" ].value = 1.0;
 
+//Création de tout les sphere
+  let red = 0xF00000
+  let white = 0xFFFFFF
+  let black = 0x000000
+  let xgrid = 20, ygrid = 20,zgrid = 20;
+  let kg = $("input[name=kRange]").val();
+  let l = $("input[name=LRange]").val();
+  let o = $("input[name=ORange]").val();
+
+  for (let  i = -xgrid/2; i < xgrid/2+1; i++ )
+    for (let j = -ygrid/2; j < ygrid/2+1; j++ )
+      for (let k = -zgrid/2; k < zgrid/2+1; k++ )
+        if(i == 0 && j == 0 && k == 0)
+          addSphere(0,white,o, 0.1,i, j, k,l);
+        else if( j == 0 && k == 0)
+          addSphere(1,black,o, 0.1,i, j, k,l);
+        else if( j == 0)
+          addSphere(2,black,o, 0.1,i, j, k,l);
+        else
+          addSphere(3,black,o, 0.1,i, j, k,l);
+  addSphere(-1,red,0.5,kg/2,0,0,0,l);
+
 //Création du Stats ?
   stats = new Stats();
 
@@ -123,10 +151,8 @@ let initPostprocessing = function() {
 
 }
 
-let modif = function(x,y,z){
-  xgrid = x;
-  ygrid = y;
-  zgrid = z;
+let modif = function(p){
+  plan = p
 }
 
 export {
